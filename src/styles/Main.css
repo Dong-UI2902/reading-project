@@ -1,0 +1,11 @@
+.container {
+    padding: 10px!important;
+    margin: 10px auto!important;
+    max-width: 1200px!important;
+}
+
+.main {
+    border-radius: 0.25rem!important;
+    height: 100vh;
+}
+

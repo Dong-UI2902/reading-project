@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {Route, Routes} from "react-router-dom";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Providers from "./pages/Provider";
+import NavHeader from "./components/NavHeader";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Main from "./components/main/Main";
+import {createGlobalStyle} from "styled-components";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const GlobalStyle =createGlobalStyle`
+    body {
+        background-color: ${({ theme }) => theme.colors.background}!important;
+    }
+`
+
+const App = () => {
+    return (
+        <Providers>
+            <GlobalStyle/>
+            <NavHeader/>
+            <Main>
+                <Routes>
+                    <Route exact path="/" element={<Home/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                </Routes>
+            </Main>
+        </Providers>
+    );
 }
 
 export default App;
