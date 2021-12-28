@@ -60,7 +60,11 @@ const NavHeader: React.FC = () => {
 
     useEffect(() => {
         const currentPage = LINKS.find(link => link.to === location.pathname);
-        setActiveLinkId(currentPage.id)
+        if(currentPage) {
+            setActiveLinkId(currentPage.id)
+        } else {
+            setActiveLinkId(0)
+        }
     }, [location.pathname])
 
     return (

@@ -13,22 +13,27 @@ const CardStyle = styled.div`
         border: 1px solid rgba(0,0,0,.125);
         border-radius: 0.25rem;
         color: ${({theme}) => theme.colors.text};
+        cursor: pointer;
 `
 
-const Card = ({url, title}) => {
+const Card = ({info}) => {
+    const showImage = (idImage) => {
+        return `https://lxhentai.com/assets/hentai/${idImage}.jpg?`
+    }
+
+    const goToView = (id) => {
+        window.open(`/view/${id}`, '_blank')
+    }
 
     return (
-        <div className='col-6 col-sm-4 col-md-3'>
+        <div className='col-6 col-sm-4 col-md-3' onClick={() => goToView(info.id)}>
             <CardStyle>
                 <div className='box-img'>
-                    <img src={url} className="card-img-top" alt="image"/>
-                    <p>OneShot</p>
+                    <img src={showImage(info.thumb)} className="card-img-top" alt="image"/>
+                    <p>{info.chapter_name}</p>
                 </div>
                 <div className="card-body">
-                    <h5 className="card-title">{title}</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk
-                        of the card's content.</p>
-                    <button type="button" className="btn btn-primary">Xem Ngay</button>
+                    <h5 className="card-title">{info.name}</h5>
                 </div>
             </CardStyle>
         </div>

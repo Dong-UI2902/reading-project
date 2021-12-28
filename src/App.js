@@ -9,6 +9,8 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Main from "./components/main/Main";
 import {createGlobalStyle} from "styled-components";
+import View from "./pages/View";
+import Read from "./components/Story/Read";
 
 const GlobalStyle =createGlobalStyle`
     body {
@@ -26,6 +28,8 @@ const App = () => {
                     <Route exact path="/" element={<Home/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/view/:id" element={<View/>}/>
+                    <Route path="/view/read/:id" element={<Read/>}/>
                 </Routes>
             </Main>
         </Providers>

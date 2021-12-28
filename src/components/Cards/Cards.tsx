@@ -9,21 +9,21 @@ const Item = styled.div`
 `
 
 type CardProps = {
-    albumId: number,
-    id: number,
-    title: string,
-    url: string,
-    thumbnailUrl: string
+    chapter_id: string
+    chapter_name: string
+    id: string
+    name: string
+    thumb: string
 }
 
 const Cards = () => {
     const [list, setList] = useState<CardProps[]>([])
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/photos')
+        fetch('https://lxhentai.com/dashboard/api.php?act=get_home_tab&id=11')
             .then(res => res.json())
-            .then(photo => {
-                setList(photo)
+            .then(res => {
+                setList(res)
             })
     }, [])
 
@@ -31,7 +31,7 @@ const Cards = () => {
         <Item>
             <div className='row'>
                 {list.length > 0 && list.map(item =>
-                    <Card key={item.id} url={item.url} title={item.title}/>
+                    <Card key={item.id} info={item}/>
                 )}
             </div>
         </Item>
