@@ -12,7 +12,6 @@ const CardStyle = styled.div`
         background-clip: border-box;
         border: 1px solid rgba(0,0,0,.125);
         border-radius: 0.25rem;
-        color: ${({theme}) => theme.colors.text};
         cursor: pointer;
 `
 

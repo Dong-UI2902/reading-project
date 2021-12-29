@@ -1,0 +1,35 @@
+.tag-container {
+    columns: 200px;
+    column-rule-width: 1px;
+    column-rule-style: solid;
+    column-rule-color: #2e2e2e;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+
+    a {
+        color: #d9d9d9!important;
+    }
+
+    section {
+        display: block;
+        box-sizing: inherit;
+
+        .tag {
+            display: block;
+            border-radius: 5px;
+            -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+            background-color: transparent;
+            color: #34495e;
+            margin: 2px;
+            padding: 2px 6px 3px;
+
+            &:hover {
+                background: #4d4d4d;
+            }
+        }
+    }
+
+}

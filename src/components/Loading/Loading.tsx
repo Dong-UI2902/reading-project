@@ -2,6 +2,9 @@ import React, {memo} from 'react';
 import styled from "styled-components";
 
 const Style = styled.div`
+text-align: center;
+margin-top: 30%;
+
 .lds-ellipsis {
   display: inline-block;
   position: relative;

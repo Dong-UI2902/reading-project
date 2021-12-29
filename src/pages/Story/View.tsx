@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
-import '../styles/View.scss'
-import Loading from "../components/Loading/Loading";
-import AlertError from "../components/AlertError/AlertError";
+import '../../styles/View.scss'
+import Loading from "../../components/Loading/Loading";
+import AlertError from "../../components/AlertError/AlertError";
+import {URL_Chapter, URL_Info, URL_View} from "../../context/story/constant";
 
 const ViewStyle = styled.div`
     #title {
@@ -13,10 +14,6 @@ const ViewStyle = styled.div`
         h1 {
             color: #db0075!important;
             font-weight: 600;
-        }
-        
-        time {
-            color: ${({theme}) => theme.colors.text};
         }
     }
     
@@ -44,7 +41,6 @@ const ViewStyle = styled.div`
         display: flex;
         
         .flex1 {
-            color: ${({theme}) => theme.colors.text};
             margin-left: 10px;
         }
     }
@@ -58,12 +54,12 @@ const ViewStyle = styled.div`
     }
     
     #chapters {     
-        div {
-            color: ${({theme}) => theme.colors.text}!important;
-        }
-        
         ul {
             padding-left: 0;
+            
+            .seen {
+                color: ${({theme}) => theme.colors.text}!important;
+            }
         }
     }
 `
@@ -87,16 +83,25 @@ const View = () => {
         const href = data.getElementsByTagName('a')
         if (href.length > 0) {
             const length = href.length
-            let rmUrl = '/story/chapter.php?id='
+            let rmUrl = URL_Chapter
+            let rmUrl2 = URL_Info
             let replaceUrl = 'read/'
             if (id === 'sameAuthor') {
-                rmUrl = 'story/view.php?id='
-                replaceUrl = '/view'
+                rmUrl = URL_View
+                replaceUrl = 'view/'
             }
 
             for (let i = 0; i < length; i++) {
                 const url = href[i].getAttribute('href')
-                const newUrl = `${replaceUrl + url.replace(rmUrl, '')}`
+                let newUrl = ''
+
+                if (url.indexOf(rmUrl) < 0) {
+                    replaceUrl = 'type/'
+                    newUrl = `${replaceUrl + url.replace(rmUrl2, '')}`
+                } else {
+                    newUrl = `${replaceUrl + url.replace(rmUrl, '')}`
+                }
+
                 href[i].setAttribute('href', newUrl)
             }
         }

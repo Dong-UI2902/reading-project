@@ -1,20 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
+import Loading from "../../components/Loading/Loading";
+import AlertError from "../../components/AlertError/AlertError";
 
 const ViewStyles = styled.div`
-        margin: 10 auto;
+        text-align: center;
         
         div {
             position: relative;
-        }
-        
-        .cen {
-            position: absolute;
-            bottom: 0;
-            height: 4%;
-            background-color: white;
-            width: 100%;
         }
         
         img {
@@ -26,24 +20,30 @@ const ViewStyles = styled.div`
 const Read = () => {
     const params = useParams();
     const [images, setImages] = useState([])
+    const [loading, setLoading] = useState<boolean>(false)
+    const [error, setError] = useState()
 
     useEffect(() => {
+        setLoading(true)
         fetch(`https://lxhentai.com/story/chapter.php?id=${params.id}`)
             .then(res => res.text())
             .then(res => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(res, 'text/html');
                 const arr = Array.from(doc.querySelectorAll('div img')).map(img => img.getAttribute('src'))
-                arr.splice(0, 6)
+                arr.splice(0, 2)
                 arr.splice(arr.length - 1, 1)
                 setImages(arr)
             })
+            .catch(newError => setError(newError))
+            .finally(() => setLoading(false))
     }, [])
 
     return (
         <ViewStyles>
+            <Loading loading={loading}/>
+            <AlertError>{error}</AlertError>
             {images.map((item, index) => <div key={index}>
-                <div className='cen'/>
                 <img src={item}/>
             </div>)}
         </ViewStyles>
