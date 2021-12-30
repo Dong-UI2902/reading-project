@@ -88,7 +88,7 @@ const View = () => {
             let replaceUrl = 'read/'
             if (id === 'sameAuthor') {
                 rmUrl = URL_View
-                replaceUrl = 'view/'
+                replaceUrl = '/view/'
             }
 
             for (let i = 0; i < length; i++) {
@@ -96,8 +96,8 @@ const View = () => {
                 let newUrl = ''
 
                 if (url.indexOf(rmUrl) < 0) {
-                    replaceUrl = 'type/'
-                    newUrl = `${replaceUrl + url.replace(rmUrl2, '')}`
+                    replaceUrl = '/type/'
+                    newUrl = `${replaceUrl + url.replace(rmUrl2, '') +'/1'}`
                 } else {
                     newUrl = `${replaceUrl + url.replace(rmUrl, '')}`
                 }

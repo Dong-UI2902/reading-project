@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Card from "./Card";
 import Loading from "../Loading/Loading";
 import AlertError from "../AlertError/AlertError";
-import {URL_Chapter, URL_View} from "../../context/story/constant";
+import {MESSAGE_ERROR, URL_Chapter, URL_View} from "../../context/story/constant";
+import {Link} from "react-router-dom";
 
 const Item = styled.div`
     .row > div {
@@ -19,16 +20,26 @@ type CardProps = {
     thumb: string
 }
 
-const Cards = ({id}) => {
+const Cards = ({id, page, isHome = false}) => {
     const [list, setList] = useState<CardProps[]>([])
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState()
+    const [error, setError] = useState<string>()
+    const [pages, setPages] = useState([])
 
     const getUrl = () => {
-        if (id === 'new')
-            return 'https://lxhentai.com/story/index.php?p=1'
+        if (id === 'new') {
+            return `https://lxhentai.com/story/index.php?p=${page}`
+        }
 
-        return `https://lxhentai.com/dashboard/api.php?act=get_home_tab&id=${id}`
+        return `https://lxhentai.com/story/cat.php?id=${id}&p=${page}`
+    }
+
+    const getTo = () => {
+        if (id === 'new') {
+            return `/all`
+        }
+
+        return `/type/${id}`
     }
 
     const removeSameId = (res) => {
@@ -72,43 +83,88 @@ const Cards = ({id}) => {
         }
     }
 
-    useEffect(() => {
+    const changeUrlNav = (navigation) => {
+        const arrUrl = navigation.querySelectorAll('.page-link')
+        const length = arrUrl.length
+        const arr = []
+        for (let i = 0; i < length; i++) {
+            const pageNumber = arrUrl[i]
+                .getAttribute('href')
+                .replace(`cat.php?id=${id}&p=`, '')
+                .replace('index.php?p=', '')
+            arr.push(pageNumber)
+        }
+
+        if (page > 1) {
+            arr.shift()
+        }
+
+        setPages(arr)
+    }
+
+    const getData = () => {
         setLoading(true)
         fetch(getUrl())
+            .then(res => res.text())
             .then(res => {
-                if (id === 'new')
-                    return res.text()
-                return res.json()
-            })
-            .then(res => {
-                if (id !== 'new')
-                    return setList(removeSameId(res))
-
                 const parser = new DOMParser()
                 const doc = parser.parseFromString(res, 'text/html')
                 const box = doc
                     .querySelectorAll('.col-md-3')
 
+                const navigation = doc.getElementsByTagName('nav')[0]
+                changeUrlNav(navigation)
+
                 const length = box.length
+                const arr = []
                 for (let i = 0; i < length; i++) {
-                    list.push(formatInfo(box[i]))
+                    arr.push(formatInfo(box[i]))
                 }
+                setList(removeSameId(arr))
             })
-            .catch(newError => setError(newError))
+            .catch(newError => setError(MESSAGE_ERROR))
             .finally(() => setLoading(false))
-    }, [])
+    }
+
+    useEffect(() => {
+        getData()
+    }, [page])
 
     return (
         <Item>
             <Loading loading={loading}/>
-            <AlertError>{error}</AlertError>
-            <div className='row'>
-                {list.length > 0 && list.map(item =>
-                    <Card key={item.id} info={item}/>
-                )}
-            </div>
+            {!(loading) && <>
+                <AlertError>{error}</AlertError>
+                <div className='row'>
+                    {list.length > 0 && list.map(item =>
+                        <Card key={item.id} info={item}/>
+                    )}
+                </div>
+                <ul className='pagination justify-content-center mt-4'>
+                    <li className="page-item">
+                        <Link className="page-link"
+                              to={`${getTo()}/1`}
+                              tabIndex={-1} aria-disabled="true">«
+                        </Link>
+                    </li>
+                    {pages.map((item, index) => {
+                        if (index < pages.length - 1)
+                            return <li key={index} className={`page-item ${page === item && 'active'}`}>
+                                <Link className="page-link" to={`${getTo()}/${item}`} replace>
+                                    {item}
+                                </Link>
+                            </li>
+
+                        return null
+                    })}
+                    <li className="page-item">
+                        <Link className="page-link" to={`${getTo()}/${pages[pages.length - 1]}`} tabIndex={-1}
+                              aria-disabled="true">»</Link>
+                    </li>
+                </ul>
+            </>}
         </Item>
-    );
-};
+    )
+}
 
 export default Cards;

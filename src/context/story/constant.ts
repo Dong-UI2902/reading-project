@@ -69,3 +69,4 @@ export const Types = [
 export const URL_Chapter = '/story/chapter.php?id='
 export const URL_Info = '/story/cat.php?id='
 export const URL_View = '/story/view.php?id='
+export const MESSAGE_ERROR = 'Đã có lỗi xảy ra, xin vui lòng liên hệ với quản trị viên!'

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Style = styled.div`
 text-align: center;
-margin-top: 30%;
+margin-top: 20vh;
 
 .lds-ellipsis {
   display: inline-block;
@@ -17,7 +17,7 @@ margin-top: 30%;
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #fff;
+  background: ${({theme}) => theme.colors.text};
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {
@@ -64,11 +64,16 @@ margin-top: 30%;
 const Loading = ({loading}) => {
     return <>
         {loading && <Style>
-            <div className="lds-ellipsis">
-                <div/>
-                <div/>
-                <div/>
-                <div/>
+            <div className='d-flex justify-content-center'>
+                <div className='d-flex justify-content-start align-items-center'>
+                    <h3>Đang tải truyện</h3>
+                    <div className="lds-ellipsis">
+                        <div/>
+                        <div/>
+                        <div/>
+                        <div/>
+                    </div>
+                </div>
             </div>
         </Style>}
     </>

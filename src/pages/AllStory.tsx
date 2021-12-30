@@ -1,15 +1,15 @@
 import React from 'react';
+import Cards from "../components/Cards/Cards";
 import {useParams} from "react-router-dom";
-import Cards from "../../components/Cards/Cards";
 
-const Type = () => {
+const AllStory = () => {
     const params = useParams();
 
     return (
         <div>
-            <Cards id={params.id} page={params.p}/>
+            <Cards id={'new'} page={params.p}/>
         </div>
     );
 };
 
-export default Type;
+export default AllStory;

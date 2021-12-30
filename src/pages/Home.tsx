@@ -5,9 +5,9 @@ const Home = () => {
 
     return (
         <div>
-            <Cards id={'new'}/>
+            <Cards id={'new'} page={'1'} isHome={true}/>
         </div>
-    );
+    )
 };
 
 export default Home;

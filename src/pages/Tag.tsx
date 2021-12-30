@@ -4,14 +4,12 @@ import '../styles/Tag.scss'
 
 const Tag = () => {
 
-    const tag = (item) => {
-        return <a className='tag' href={`/view/type/${item.id}`}>{item.name}</a>
-    }
-
     return (
         <div className='tag-container'>
             <section>
-                {Types.map(item => tag(item))}
+                {Types.map(item => (
+                    <a key={item.id} className='tag' href={`type/${item.id}/1`}>{item.name}</a>
+                ))}
             </section>
         </div>
     );

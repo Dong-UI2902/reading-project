@@ -13,6 +13,7 @@ import View from "./pages/Story/View";
 import Read from "./pages/Story/Read";
 import Type from "./pages/Type/Type";
 import Tag from "./pages/Tag";
+import AllStory from "./pages/AllStory";
 
 const GlobalStyle =createGlobalStyle`
     body {
@@ -33,10 +34,11 @@ const App = () => {
                     <Route exact path="/" element={<Home/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/tag" element={<Tag/>}/>
+                    <Route path="/all/:p" element={<AllStory/>}/>
+                    <Route path="/type/:id/:p" element={<Type/>}/>
                     <Route path="/view/:id" element={<View/>}/>
                     <Route path="/view/read/:id" element={<Read/>}/>
-                    <Route path="/view/type/:id" element={<Type/>}/>
-                    <Route path="/tag" element={<Tag/>}/>
                 </Routes>
             </Main>
         </Providers>

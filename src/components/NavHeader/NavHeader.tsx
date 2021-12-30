@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import styled from "styled-components";
 import {AppItem, AuthItem, SocialItem} from "./Items";
 import {AppLinks, AuthLinks, LINKS, SocialLinks} from "./Links";
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import useTheme from "../../theme/useTheme";
 
 const CustomStyle = styled.div`
@@ -72,9 +72,9 @@ const NavHeader: React.FC = () => {
             <div className="nav-head">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container-fluid me-5 ms-5">
-                        <a className="navbar-brand" href="/">
+                        <Link className="navbar-brand" to="/">
                             <img className='logo' src='/CheemsHeart.png' alt='image'/>
-                        </a>
+                        </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -89,9 +89,9 @@ const NavHeader: React.FC = () => {
                                 <AuthItem links={AuthLinks()} activeLinkId={activeLinkId}/>
                             </ul>
                             <div className='ms-5'>
-                                <a className='nav-link' href='#' onClick={toggleTheme}>
+                                <Link className='nav-link' to='#' onClick={toggleTheme}>
                                     {isDark ? <i className="bi bi-sun"/> : <i className="bi bi-moon"/>}
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
