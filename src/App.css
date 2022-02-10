@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 p {
     font-family: 'Roboto', sans-serif;
 }
@@ -10,4 +16,19 @@ a {
 
 .page-link span{
     color: #1f1f1f!important;
+}
+
+.main-color {
+    color: #db0075;
+}
+
+@media only screen and (max-width: 900px) {
+    .selected-image {
+        height: 350px;
+    }
+
+    .carousel__image {
+        height: 50px;
+        min-width: 50px;
+    }
 }

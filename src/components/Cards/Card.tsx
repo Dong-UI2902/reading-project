@@ -6,7 +6,8 @@ const CardStyle = styled.div`
         position: relative;
         display: flex;
         flex-direction: column;
-        min-width: 0;
+        max-width: 224px;
+        margin: 0 auto;
         word-wrap: break-word;
         background-color: ${({theme}) => theme.colors.card.background};
         background-clip: border-box;
@@ -25,17 +26,17 @@ const Card = ({info}) => {
     }
 
     return (
-        <div className='col-6 col-sm-4 col-md-3' onClick={() => goToView(info.id)}>
-            <CardStyle>
-                <div className='box-img'>
-                    <img src={showImage(info.thumb)} className="card-img-top" alt="image"/>
-                    <p>{info.chapter_name}</p>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">{info.name}</h5>
-                </div>
-            </CardStyle>
-        </div>
+            <div className='col-6 col-sm-4 col-md-2 boxStory' onClick={() => goToView(info.id)}>
+                <CardStyle>
+                    <div className='box-img'>
+                        <img src={showImage(info.thumb)} className="card-img-top" alt="đã xảy ra lỗi"/>
+                        <p>{info.chapter_name}</p>
+                    </div>
+                    <div className="card-body">
+                        <h5 className="card-title">{info.name}</h5>
+                    </div>
+                </CardStyle>
+            </div>
     );
 };
 

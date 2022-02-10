@@ -16,13 +16,13 @@ export const LINKS: Links = [
     {
         id: 2,
         name: "About",
-        to: "/#",
+        to: "/about",
         type: APP_TYPE,
     },
     {
         id: 3,
-        name: "Tags",
-        to: '/tag',
+        name: "Store",
+        to: '/store',
         type: APP_TYPE,
     },
     {
@@ -54,6 +54,12 @@ export const LINKS: Links = [
         name: "instagram",
         to: '#',
         type: SOCIAL_TYPE,
+    },
+    {
+        id: 9,
+        name: "Hai-Ten",
+        to: '/story',
+        type: APP_TYPE,
     },
 ]
 

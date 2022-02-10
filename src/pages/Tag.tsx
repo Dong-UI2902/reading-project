@@ -1,8 +1,12 @@
-import React from 'react';
-import {Types} from "../context/story/constant";
+import React, {useEffect} from 'react';
+import {Types} from "../context/list/constant";
 import '../styles/Tag.scss'
 
 const Tag = () => {
+
+    useEffect(() => {
+        document.title = 'Thể loại'
+    }, [])
 
     return (
         <div className='tag-container'>

@@ -66,7 +66,7 @@ const Loading = ({loading}) => {
         {loading && <Style>
             <div className='d-flex justify-content-center'>
                 <div className='d-flex justify-content-start align-items-center'>
-                    <h3>Đang tải truyện</h3>
+                    <h3>Đang tải</h3>
                     <div className="lds-ellipsis">
                         <div/>
                         <div/>

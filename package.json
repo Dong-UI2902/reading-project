@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.11.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -10,7 +11,9 @@
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.7.2",
     "react": "^17.0.2",
+    "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.2",
+    "react-multi-carousel": "^2.6.5",
     "react-router-dom": "6",
     "react-scripts": "5.0.0",
     "sass": "^1.45.1",
@@ -46,5 +49,6 @@
     "eslint": "7.26.0",
     "eslint-config-react-app": "^7.0.0",
     "typescript": "^4.5.4"
-  }
+  },
+  "homepage": "https://caox-collection-test.000webhostapp.com/"
 }

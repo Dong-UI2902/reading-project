@@ -36,7 +36,7 @@ const CustomStyle = styled.div`
             .nav-item {
                 padding 0 5px;
         
-                .nav-link {                    
+                .nav-link {  
                     color: ${({theme}) => theme.colors.navLinks.color};
                     border-bottom: 4px solid rgba(255,255,255,0);
                 }
@@ -45,6 +45,9 @@ const CustomStyle = styled.div`
                     opacity: .8;
                     border-color: ${({theme}) => theme.colors.navLinks.active};
                 }
+            }
+            .nav-link {  
+                text-align: center;                  
             }
         }       
     }
@@ -59,8 +62,14 @@ const NavHeader: React.FC = () => {
     })
 
     useEffect(() => {
-        const currentPage = LINKS.find(link => link.to === location.pathname);
-        if(currentPage) {
+        const currentPage = LINKS.find(link => {
+            if (location.pathname !== '/' && link.to !== '/') {
+                return location.pathname.search(link.to) >= 0;
+            }
+
+            return link.to.search(location.pathname) >= 0;
+        });
+        if (currentPage) {
             setActiveLinkId(currentPage.id)
         } else {
             setActiveLinkId(0)
@@ -73,7 +82,7 @@ const NavHeader: React.FC = () => {
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container-fluid me-5 ms-5">
                         <Link className="navbar-brand" to="/">
-                            <img className='logo' src='/CheemsHeart.png' alt='image'/>
+                            <img className='logo' src='/CheemsHeart.png' alt='logo-collection'/>
                         </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -88,7 +97,7 @@ const NavHeader: React.FC = () => {
                                 <SocialItem links={SocialLinks()} activeLinkId={activeLinkId}/>
                                 <AuthItem links={AuthLinks()} activeLinkId={activeLinkId}/>
                             </ul>
-                            <div className='ms-5'>
+                            <div>
                                 <Link className='nav-link' to='#' onClick={toggleTheme}>
                                     {isDark ? <i className="bi bi-sun"/> : <i className="bi bi-moon"/>}
                                 </Link>

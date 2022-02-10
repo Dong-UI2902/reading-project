@@ -10,6 +10,6 @@ export const colors = (darkMode: boolean): Colors => ({
         active: darkMode ? '#fff' : '#212529',
     },
     card: {
-        background: darkMode ? '#404040' : '#fff',
+        background: darkMode ? '#1f1f1f' : '#fff',
     },
 })

@@ -1,9 +1,5 @@
-export type TypeStory = {
-    id: number | string
-    name: string
-}
-
-export type StoryProps = {
-    type: TypeStory[]
-    setType: any
+export interface StoryContextAPI {
+    error: string
+    loading: boolean
+    getStory: (id: string) => void
 }

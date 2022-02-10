@@ -1,12 +1,10 @@
 import React from 'react';
-import '../../styles/Main.css'
+import '../../styles/Main.scss'
 
 const Main = ({children}) => {
     return (
-        <div className='container mt-2'>
-            <div className='main'>
-                {children}
-            </div>
+        <div className='container mt-2 main'>
+            {children}
         </div>
     );
 };
