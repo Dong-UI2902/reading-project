@@ -1,0 +1,7 @@
+[
+    {
+        "username": "namitoy@paradise.co",
+        "password": "123",
+        "role": "0"
+    }
+]

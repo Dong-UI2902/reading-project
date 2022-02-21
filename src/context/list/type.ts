@@ -17,4 +17,5 @@ export interface ListStoryContextAPI {
     loading: boolean
     error: string
     getData: (id: string, page: string) => void
+    getStoryByAuthor: (author: string) => void
 }

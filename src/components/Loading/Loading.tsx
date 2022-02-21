@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Style = styled.div`
 text-align: center;
 margin-top: 20vh;
+height: 50vh;
 
 .lds-ellipsis {
   display: inline-block;
@@ -77,6 +78,6 @@ const Loading = ({loading}) => {
             </div>
         </Style>}
     </>
-};
+}
 
 export default memo(Loading);

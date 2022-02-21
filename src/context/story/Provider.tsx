@@ -30,7 +30,7 @@ const StoryProvider: React.FC = ({children}) => {
                 .replace(rmUrl, '')
             let newUrl = `${rpUrl + id}`
 
-            if (rpUrl === '/type/')
+            if (rpUrl === '/tag/')
                 newUrl = `${newUrl}/1`
 
             allUrl[i].setAttribute('href', newUrl)
@@ -49,7 +49,10 @@ const StoryProvider: React.FC = ({children}) => {
             .innerHTML
 
         const infoStory = doc.getElementById('pills-ttt')
-        changeUrl(infoStory, process.env.REACT_APP_URL_INFO, '/type/')
+        changeUrl(infoStory, process.env.REACT_APP_URL_INFO, '/tag/')
+        const author = infoStory.getElementsByTagName('div')[0];
+        changeUrl(author, '/tag//story/search.php?type=tacgia&key=', '/author/')
+        changeUrl(author, '&exact/1', '')
         document.getElementById('infoStory').innerHTML = infoStory.innerHTML
 
         const chapters = doc.getElementById('pills-new')
@@ -69,7 +72,10 @@ const StoryProvider: React.FC = ({children}) => {
             .innerHTML
 
         const info = doc.getElementsByClassName('row mt-2')[0]
-        changeUrl(info, process.env.REACT_APP_URL_INFO, '/type/')
+        changeUrl(info, process.env.REACT_APP_URL_INFO, '/tag/')
+        const author = info.getElementsByClassName('col-8')[0]
+        changeUrl(author, '/tag//story/search.php?type=tacgia&key=', '/author/')
+        changeUrl(author, '&exact/1', '')
         document.getElementById('status').innerHTML = info.innerHTML
 
         const chapters = doc.getElementsByClassName('detail-content mt-3')[0]
@@ -100,6 +106,7 @@ const StoryProvider: React.FC = ({children}) => {
             .catch(newError => setError('Đã xảy ra lỗi'))
             .finally(() => setLoading(false))
     }
+
     const memoValue = useMemo(
         () => ({
             error,

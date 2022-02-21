@@ -22,6 +22,10 @@ a {
     color: #db0075;
 }
 
+.ck-content {
+    min-height: 400px;
+}
+
 @media only screen and (max-width: 900px) {
     .selected-image {
         height: 350px;
@@ -30,5 +34,35 @@ a {
     .carousel__image {
         height: 50px;
         min-width: 50px;
+    }
+}
+
+.animate__fadeinfast {
+    animation-duration: 1ms;
+    animation-name: fadeinfast;
+}
+
+@keyframes fadeinfast {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate__fadeoutfast {
+    animation-duration: 1ms;
+    animation-name: fadeoutfast;
+}
+
+@keyframes fadeoutfast {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
     }
 }

@@ -12,7 +12,7 @@ const Tag = () => {
         <div className='tag-container'>
             <section>
                 {Types.map(item => (
-                    <a key={item.id} className='tag' href={`type/${item.id}/1`}>{item.name}</a>
+                    <a key={item.id} className='tag' href={`tag/${item.id}/1`}>{item.name}</a>
                 ))}
             </section>
         </div>

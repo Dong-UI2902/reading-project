@@ -13,12 +13,12 @@ export const LINKS: Links = [
         to: "/",
         type: APP_TYPE,
     },
-    {
-        id: 2,
-        name: "About",
-        to: "/about",
-        type: APP_TYPE,
-    },
+    // {
+    //     id: 2,
+    //     name: "About",
+    //     to: "/about",
+    //     type: APP_TYPE,
+    // },
     {
         id: 3,
         name: "Store",
@@ -31,12 +31,12 @@ export const LINKS: Links = [
         to: '/login',
         type: AUTH_TYPE,
     },
-    {
-        id: 5,
-        name: "Register",
-        to: '/register',
-        type: AUTH_TYPE,
-    },
+    // {
+    //     id: 5,
+    //     name: "Register",
+    //     to: '/register',
+    //     type: AUTH_TYPE,
+    // },
     {
         id: 6,
         name: "twitter",
@@ -59,6 +59,12 @@ export const LINKS: Links = [
         id: 9,
         name: "Hai-Ten",
         to: '/story',
+        type: APP_TYPE,
+    },
+    {
+        id: 10,
+        name: "Tags",
+        to: '/tag',
         type: APP_TYPE,
     },
 ]

@@ -14,7 +14,7 @@ const Pagination = ({pageNumber}) => {
 
     const updatePages = (start) => {
 
-        if(!start) {
+        if (!start) {
             start = 1;
         }
 
@@ -49,13 +49,12 @@ const Pagination = ({pageNumber}) => {
     }
 
 
-
     useEffect(() => {
         setPages(updatePages(page));
     }, [page]);
 
     useEffect(() => {
-        setMax(Math.floor(products.length / 8) + 1)
+        setMax(Math.round(products.length / 8))
     }, [products.length]);
 
     useEffect(() => {

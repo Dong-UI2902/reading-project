@@ -10,7 +10,7 @@ const Pagination = ({id, page}) => {
             return `/story`
         }
 
-        return `/type/${id}`
+        return `/tag/${id}`
     }
 
     return (

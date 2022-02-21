@@ -6,7 +6,7 @@ import AlertError from "../AlertError/AlertError";
 import {useListStory} from "../../context/list/Provider";
 import Pagination from "../Pagination/Pagination";
 
-const Item = styled.div`
+export const Item = styled.div`
     .row > div {
         margin-bottom: 10px;
     }

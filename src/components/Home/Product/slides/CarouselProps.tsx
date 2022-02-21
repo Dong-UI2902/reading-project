@@ -17,14 +17,15 @@ const responsive = {
     },
     mobile: {
         breakpoint: {max: 576, min: 0},
-        items: 2
+        items: 1
     }
 };
 
+const cardStyle = 'display: flex;\n' +
+    '  justify-content: center;\n' +
+    '  padding: 40px 0px;'
+
 const CarouselProps = (props: any) => {
-    const cardStyle = 'display: flex;\n' +
-        '  justify-content: center;\n' +
-        '  padding: 40px 0px;'
     return (
         <div>
             <Carousel responsive={responsive} itemClass={cardStyle}>

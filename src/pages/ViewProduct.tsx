@@ -6,24 +6,8 @@ import {FormatMoney} from "../components/Home/Product/CardProduct";
 import styled from "styled-components";
 import {useStore} from "../context/store/Provider";
 import Loading from "../components/Loading/Loading";
-
-export type Image = {
-    form?: string
-    url: string
-}
-export type Product = {
-    detail: string
-    id: number | string
-    image: Image[]
-    madeof?: string
-    numberofprod?: string
-    price: string
-    producer?: string
-    title: string
-    type?: string
-    userfor: string
-    sale?: string
-}
+import {Product} from "../context/store/type";
+import {PRODUCT} from "../context/constant/constants";
 
 const ProductStyles = styled.div `
     .rounded {
@@ -38,31 +22,14 @@ const ProductStyles = styled.div `
 const ViewProduct = () => {
     const params = useParams();
     const id = Number(params.id);
-    const {products, loading} = useStore()
+    const {products, loading, findProduct} = useStore()
 
-    const [product, setProduct] = useState<Product>({
-        "id": '',
-        "image": [
-            {
-                "url": "https://drive.google.com/uc?export=view&id=1kJ3eg4SqmJra-Fz3NaJSGXJF0z6_vLEc",
-                "form": "1"
-            }
-        ],
-        "title": "Cốc thủ dâm Lu Lu",
-        "producer": "A-ONE",
-        "madeof": "Sillicon TPE",
-        "type": "Thủ công",
-        "detail": "Âm hộ giả với các bé loli từ gia đình Onasista, được mô phỏng theo tử cung của phụ nữ.",
-        "userfor": "Nam",
-        "numberofprod": "20",
-        "price": "550000",
-        "sale": "500000"
-    })
+    const [product, setProduct] = useState<Product>(PRODUCT)
 
     useEffect(() => {
-        const temp = products.filter(item => item.id === id)
-        if(temp[0]?.id) {
-            setProduct(temp[0])
+        const temp = findProduct(id)
+        if(temp) {
+            setProduct(temp)
         }
     }, [products])
 
@@ -83,9 +50,11 @@ const ViewProduct = () => {
     return (
         <ProductStyles className='product'>
             <Loading loading={loading}/>
-            {!loading && <div className='row detail'>
+            <div className={`row detail ${loading && 'd-none'}`}>
                 <div className='col-md-6'>
-                    <ImageCarousel images={product.image}/>
+                    {
+                        product.image.length > 0 && <ImageCarousel images={product.image}/>
+                    }
                 </div>
                 <div className='col-md-6'>
                     <h2 className='title main-color'>
@@ -123,7 +92,7 @@ const ViewProduct = () => {
 
                     </div>
                 </div>
-            </div>}
+            </div>
         </ProductStyles>
     );
 };

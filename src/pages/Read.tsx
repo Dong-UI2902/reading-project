@@ -73,6 +73,10 @@ const Read = () => {
         fixUrlChapterSelect(doc)
 
         document.getElementById('chapters').innerHTML = chapters.innerHTML
+        document.getElementById('chapters2').innerHTML = `<div class='col-6 ms-auto me-auto mt-5 mb-5'>
+                    Chuyển Chapter Nhanh:
+                    ${chapters.getElementsByTagName('select')[0].outerHTML}
+                </div>`
     }
 
     const getChaptersOnMobile = (doc) => {
@@ -83,6 +87,9 @@ const Read = () => {
         fixUrlChapterNextOrBack(a)
 
         document.getElementById('chapters').innerHTML = `<div class='d-flex'>
+            ${chapters.innerHTML}
+        </div>`
+        document.getElementById('chapters2').innerHTML = `<div class='d-flex'>
             ${chapters.innerHTML}
         </div>`
     }
@@ -120,11 +127,13 @@ const Read = () => {
                 <div>
                     <h2>{aTag}</h2>
                 </div>
-                <div id='chapters' className='row'/>
+                <div id='chapters' className='row mb-4'/>
             </div>
             {images.map((item, index) => <div key={index}>
                 <img src={item} alt='Đã có lỗi xảy ra'/>
             </div>)}
+            <div id='chapters2' className='mt-3'>
+            </div>
         </ViewStyles>
     );
 };

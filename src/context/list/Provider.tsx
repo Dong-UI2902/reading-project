@@ -106,10 +106,31 @@ const ListStoryProvider: React.FC = ({children}) => {
                 document.title = doc.title
 
                 const navigation = doc.getElementsByTagName('nav')[0]
-                if(navigation)
+                if (navigation)
                     getNav(doc.getElementsByTagName('nav')[0], id, page)
             })
             .catch(newError => setError(newError))
+            .finally(() => setLoading(false))
+    }
+
+    const getStoryByAuthor = (author) => {
+        setLoading(true)
+        services
+            .getStoryByAuthor(`https://${isMobile ? 'm.' : ''}lxhentai.com/story/search.php?type=tacgia&key=${author}&exact`)
+            .then(res => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(res, 'text/html');
+                const arr = [];
+                let listStory = doc.querySelectorAll('div.col-4');
+                if (!isMobile) {
+                    listStory = doc.querySelectorAll('div.col-md-2');
+                }
+                Array.from(listStory).map(item => {
+                    return arr.push(getDataInElement(item))
+                });
+                setList(arr);
+            })
+            .catch()
             .finally(() => setLoading(false))
     }
 
@@ -120,6 +141,7 @@ const ListStoryProvider: React.FC = ({children}) => {
             loading,
             error,
             getData,
+            getStoryByAuthor,
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }), [list, nav, loading, error],
     )

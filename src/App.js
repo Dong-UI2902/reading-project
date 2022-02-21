@@ -6,13 +6,15 @@ import Register from "./pages/Register";
 import Providers from "./pages/Provider";
 import NavHeader from "./components/NavHeader";
 import React from "react";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
+
 import Main from "./components/main/Main";
 import {createGlobalStyle} from "styled-components";
 import View from "./pages/View";
 import Read from "./pages/Read";
-import Type from "./pages/Type";
+import TagList from "./pages/TagList";
 import Tag from "./pages/Tag";
 import AllStory from "./pages/AllStory";
 import ViewMobile from "./pages/ViewMobile";
@@ -23,6 +25,9 @@ import {ThemeProvider} from "./theme/Provider";
 import SexToy from "./pages/SexToy";
 import About from "./pages/About";
 import EditStore from "./pages/EditStore";
+import StoreProvider from "./context/store/Provider";
+import Footer from "./components/footer/footer";
+import Author from "./pages/Author";
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -37,27 +42,32 @@ const App = () => {
     return (
         <ThemeProvider>
             <GlobalStyle/>
-            <NavHeader/>
-            <Main>
-                <Providers>
+            <Providers>
+                <NavHeader/>
+                <Main>
+
                     <Routes>
                         <Route exact path="/" element={<Home/>}/>
-                        <Route path="/store" element={<SexToy/>}/>
-                        <Route path="/store/:page" element={<SexToy/>}/>
-                        <Route path="/store/edit" element={<EditStore/>}/>
-                        <Route path="/store/product/:id" element={<ViewProduct/>}/>
-                        <Route path="/story" element={<Story/>}/>
-                        <Route path="/story/:p" element={<AllStory/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/about" element={<About/>}/>
+
+                        <Route path="/store" element={<StoreProvider><SexToy/></StoreProvider>}/>
+                        <Route path="/store/:page" element={<StoreProvider><SexToy/></StoreProvider>}/>
+                        <Route path="/store/edit" element={<StoreProvider><EditStore/></StoreProvider>}/>
+                        <Route path="/store/product/:id" element={<StoreProvider><ViewProduct/></StoreProvider>}/>
+
+                        <Route path="/story" element={<Story/>}/>
+                        <Route path="/story/:p" element={<AllStory/>}/>
                         <Route path="/tag" element={<Tag/>}/>
-                        <Route path="/type/:id/:p" element={<Type/>}/>
+                        <Route path="/tag/:id/:p" element={<TagList/>}/>
+                        <Route path="/author/:keys" element={<Author/>}/>
                         <Route path="/view/:id" element={isMobile ? <ViewMobile/> : <View/>}/>
                         <Route path="/view/:id/read/:chapter" element={<Read/>}/>
                     </Routes>
-                </Providers>
-            </Main>
+                    <Footer/>
+                </Main>
+            </Providers>
         </ThemeProvider>
     );
 }

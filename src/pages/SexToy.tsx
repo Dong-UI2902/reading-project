@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {myList} from "../assets/data";
 import CarouselProps from "../components/Home/Product/slides/CarouselProps";
 import CardProduct from "../components/Home/Product/CardProduct";
 import Pagination from "../components/Home/Pagination/Pagination";
 import {useParams} from "react-router-dom";
 import {useStore} from "../context/store/Provider";
 import Loading from "../components/Loading/Loading";
+import {toast} from "react-toastify";
 
+toast.configure()
 const SexToy = () => {
-    const {products, loading} = useStore()
+    const {products, loading, hot} = useStore()
     const [list, setList] = useState([])
 
     const params = useParams();
@@ -53,15 +54,20 @@ const SexToy = () => {
             </div>
             <div>
                 <p className='title'>🔥 Lựa Chọn Hot Trong Tuần</p>
-                <CarouselProps>
-                    {myList.map((card: any, index: any) => {
-                        return (
-                            <div className='col-md-12 pe-3 ps-3 p-1' key={card.id}>
-                                <CardProduct card={card}/>
-                            </div>
-                        );
-                    })}
-                </CarouselProps>
+                {
+                    hot.length > 0 ? (<CarouselProps>
+                        {hot.map((card: any, index: any) => {
+                            return (
+                                <div className='col-md-12 pe-3 ps-3 p-1' key={card.id}>
+                                    <CardProduct card={card}/>
+                                </div>
+                            );
+                        })}
+                    </CarouselProps>) : (
+                        <p className='text-center'>Đang cập nhật...</p>
+                    )
+                }
+
             </div>
 
             <div className='mt-5'>

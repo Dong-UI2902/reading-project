@@ -32,6 +32,14 @@ export const fixUrlImage = (image) => {
     return image;
 }
 
+const checkNumberOfProd = (number) => {
+    if(number > 0) {
+        return 'Còn hàng';
+    }
+
+    return 'Hết hàng';
+}
+
 const CardProduct = ({card}) => {
 
     return (
@@ -51,7 +59,7 @@ const CardProduct = ({card}) => {
                             <span className="text-price price">
                                         <FormatMoney price={card.price}/>
                                     </span>
-                            <small className="text-muted">Còn Hàng</small>
+                            <small className="text-muted">{checkNumberOfProd(card.numberofprod)}</small>
                         </div>
                     </div>
                     <Link type="button" className="btn btn-danger" to={`/store/product/${card.id}`}>Xem Ngay</Link>

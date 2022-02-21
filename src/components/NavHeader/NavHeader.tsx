@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import styled from "styled-components";
 import {AppItem, AuthItem, SocialItem} from "./Items";
 import {AppLinks, AuthLinks, LINKS, SocialLinks} from "./Links";
 import {Link, useLocation} from "react-router-dom";
 import useTheme from "../../theme/useTheme";
+import {useAuth} from "../../context/auth";
 
 const CustomStyle = styled.div`
     .nav-head {
@@ -54,12 +54,17 @@ const CustomStyle = styled.div`
 `
 const NavHeader: React.FC = () => {
     const location = useLocation();
-    const {toggleTheme, isDark} = useTheme()
+    const {toggleTheme, isDark} = useTheme();
+    const {user, logout} = useAuth();
 
     const [activeLinkId, setActiveLinkId] = useState<number>(() => {
         if (location.pathname === '/')
             return 1;
     })
+
+    const handleClick = () => {
+        logout();
+    }
 
     useEffect(() => {
         const currentPage = LINKS.find(link => {
@@ -70,9 +75,9 @@ const NavHeader: React.FC = () => {
             return link.to.search(location.pathname) >= 0;
         });
         if (currentPage) {
-            setActiveLinkId(currentPage.id)
+            setActiveLinkId(currentPage.id);
         } else {
-            setActiveLinkId(0)
+            setActiveLinkId(0);
         }
     }, [location.pathname])
 
@@ -95,7 +100,21 @@ const NavHeader: React.FC = () => {
                             </ul>
                             <ul className="navbar-nav mb-2 mb-lg-0">
                                 <SocialItem links={SocialLinks()} activeLinkId={activeLinkId}/>
-                                <AuthItem links={AuthLinks()} activeLinkId={activeLinkId}/>
+                                {
+                                    user ? (<li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {user.username}
+                                        </a>
+                                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><Link className="dropdown-item" to="/store/edit">Chỉnh sửa cửa hàng</Link></li>
+                                            <li>
+                                                <hr className="dropdown-divider" />
+                                            </li>
+                                            <li><a className="dropdown-item" type='button' onClick={handleClick}>Logout</a></li>
+                                        </ul>
+                                    </li>) : (<AuthItem links={AuthLinks()} activeLinkId={activeLinkId}/>)
+                                }
                             </ul>
                             <div>
                                 <Link className='nav-link' to='#' onClick={toggleTheme}>

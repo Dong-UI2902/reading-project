@@ -2,20 +2,20 @@ import React from 'react';
 import ListStoryProvider from "../context/list/Provider";
 import InfoDeviceProvider from "../context/device/Provider";
 import StoryProvider from "../context/story/Provider";
-import StoreProvider from "../context/store/Provider";
+import {AuthProvider} from "../context/auth";
 
 const Providers: React.FC = ({children}) => {
     return (
         <>
-            <InfoDeviceProvider>
-                <ListStoryProvider>
-                    <StoryProvider>
-                        <StoreProvider>
+            <AuthProvider>
+                <InfoDeviceProvider>
+                    <ListStoryProvider>
+                        <StoryProvider>
                             {children}
-                        </StoreProvider>
-                    </StoryProvider>
-                </ListStoryProvider>
-            </InfoDeviceProvider>
+                        </StoryProvider>
+                    </ListStoryProvider>
+                </InfoDeviceProvider>
+            </AuthProvider>
         </>
     );
 };
