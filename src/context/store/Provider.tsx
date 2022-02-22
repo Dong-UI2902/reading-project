@@ -3,6 +3,7 @@ import {Product, StoreContextAPI} from "./type";
 import services from "./services";
 import {toast} from "react-toastify";
 import {PRODUCT, TOAST_MESSAGE} from "../constant/constants";
+import {useLocation} from "react-router-dom";
 
 const StoreContext = createContext<StoreContextAPI>({} as StoreContextAPI)
 const StoreProvider: React.FC = ({children}) => {
@@ -10,6 +11,18 @@ const StoreProvider: React.FC = ({children}) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [hot, setHot] = useState<Product[]>([]);
     const [product, setProduct] = useState<Product>(() => PRODUCT)
+    const [error, setError] = useState<string>()
+    const location = useLocation();
+
+    useEffect(() => {
+        if(error) window.location.href = '/404';
+    }, [error])
+
+    useEffect(() => {
+        if (error) setError(null)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname])
 
     const logMessage = (message) => {
         const text = (document.getElementById('log') as HTMLInputElement);
@@ -46,13 +59,17 @@ const StoreProvider: React.FC = ({children}) => {
             }
         )
             .then(res => {
-                res.reverse();
-                res.sort(function (a, b) {
-                    if (a.numberofprod > b.numberofprod) return -1;
-                    if (a.numberofprod < b.numberofprod) return 1;
-                    return 0;
-                });
-                setProducts(res)
+                const out = []
+                const still = []
+                res.forEach(item => {
+                    if (item.numberofprod <= 0) {
+                        out.push(item);
+                    } else {
+                        still.push(item);
+                    }
+                })
+                const data = out.concat(still).reverse();
+                setProducts(data)
                 arr1 = res
                 return services
                     .getHOT('/data/store/hot.txt')
@@ -66,6 +83,7 @@ const StoreProvider: React.FC = ({children}) => {
 
                 setHot(arr);
             })
+            .catch(e => setError(e))
             .finally(() => {
                 logMessage('Lấy dữ liệu thành công')
                 setLoading(false)

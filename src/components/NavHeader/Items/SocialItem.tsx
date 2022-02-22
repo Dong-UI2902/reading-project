@@ -1,14 +1,14 @@
 import React from 'react';
-import NavItem from "../NavItem/NavItem";
 import {ItemProps} from "./type";
 
 const SocialItem: React.FC<ItemProps> = ({links}) => (
     <>
         {links.map((link) => (
-            <NavItem key={link.id} activeLink={false}
-                     href={link.to}>
-                <i className={`bi bi-${link.name}`}/>
-            </NavItem>
+            <li key={link.id} className="nav-item">
+                <a className="nav-link" target='_blank' href={link.to}>
+                    <i className={`bi bi-${link.name}`}/>
+                </a>
+            </li>
         ))}
     </>
 );
