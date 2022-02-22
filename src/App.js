@@ -28,6 +28,7 @@ import EditStore from "./pages/EditStore";
 import StoreProvider from "./context/store/Provider";
 import Footer from "./components/footer/footer";
 import Author from "./pages/Author";
+import NotFound from "./pages/NotFound";
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -51,6 +52,8 @@ const App = () => {
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/about" element={<About/>}/>
+
+                        <Route path="/404" element={<NotFound/>}/>
 
                         <Route path="/store" element={<StoreProvider><SexToy/></StoreProvider>}/>
                         <Route path="/store/:page" element={<StoreProvider><SexToy/></StoreProvider>}/>

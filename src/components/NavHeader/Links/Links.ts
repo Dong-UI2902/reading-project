@@ -39,14 +39,14 @@ export const LINKS: Links = [
     // },
     {
         id: 6,
-        name: "twitter",
-        to: '#',
+        name: "discord",
+        to: 'https://discord.gg/aucq647J',
         type: SOCIAL_TYPE,
     },
     {
         id: 7,
         name: "facebook",
-        to: '#',
+        to: 'https://www.facebook.com/namitoyshop',
         type: SOCIAL_TYPE,
     },
     {

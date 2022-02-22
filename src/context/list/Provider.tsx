@@ -1,8 +1,9 @@
-import React, {createContext, useContext, useMemo, useState} from 'react';
+import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import {ListStoryContextAPI, Story} from "./type";
 import services from "./services";
 import {useDevice} from "../device/Provider";
 import {isMobile} from "react-device-detect";
+import {useLocation} from "react-router-dom";
 
 const ListStoryContext = createContext<ListStoryContextAPI>({} as ListStoryContextAPI)
 
@@ -14,6 +15,17 @@ const ListStoryProvider: React.FC = ({children}) => {
     const {infoDevice} = useDevice()
     const parser = new DOMParser()
     const url = infoDevice()
+    const location = useLocation();
+
+    useEffect(() => {
+        if(error) window.location.href = '/404';
+    }, [error])
+
+    useEffect(() => {
+        if (error) setError(null)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname])
 
     const removeSameId = (res) => {
         const seen = new Set();
@@ -116,7 +128,7 @@ const ListStoryProvider: React.FC = ({children}) => {
     const getStoryByAuthor = (author) => {
         setLoading(true)
         services
-            .getStoryByAuthor(`https://${isMobile ? 'm.' : ''}lxhentai.com/story/search.php?type=tacgia&key=${author}&exact`)
+            .getStoryByAuthor(`story/search.php?type=tacgia&key=${author}&exact`)
             .then(res => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(res, 'text/html');
@@ -130,7 +142,7 @@ const ListStoryProvider: React.FC = ({children}) => {
                 });
                 setList(arr);
             })
-            .catch()
+            .catch(e => setError(e))
             .finally(() => setLoading(false))
     }
 

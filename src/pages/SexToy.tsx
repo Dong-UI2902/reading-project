@@ -52,39 +52,43 @@ const SexToy = () => {
                 }}>namitoys Store</h2>
                 <Loading loading={loading}/>
             </div>
-            <div>
-                <p className='title'>🔥 Lựa Chọn Hot Trong Tuần</p>
-                {
-                    hot.length > 0 ? (<CarouselProps>
-                        {hot.map((card: any, index: any) => {
-                            return (
-                                <div className='col-md-12 pe-3 ps-3 p-1' key={card.id}>
-                                    <CardProduct card={card}/>
-                                </div>
-                            );
-                        })}
-                    </CarouselProps>) : (
-                        <p className='text-center'>Đang cập nhật...</p>
-                    )
-                }
+            {!loading && (
+                <>
+                    <div>
+                        <p className='title'>🔥 Lựa Chọn Hot Trong Tuần</p>
+                        {
+                            hot.length > 0 ? (<CarouselProps>
+                                {hot.map((card: any, index: any) => {
+                                    return (
+                                        <div className='col-md-12 pe-3 ps-3 p-1' key={card.id}>
+                                            <CardProduct card={card}/>
+                                        </div>
+                                    );
+                                })}
+                            </CarouselProps>) : (
+                                <p className='text-center'>Đang cập nhật...</p>
+                            )
+                        }
 
-            </div>
+                    </div>
 
-            <div className='mt-5'>
-                <p className='title'>tất cả các mặt hàng</p>
-                <div className='row'>
-                    {list.map((card: any) => {
-                        return (
-                            <div className="col-sm-3 col-12 mb-3" key={card.id}>
-                                <CardProduct card={card}/>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-            <div className='mt-4'>
-                <Pagination pageNumber={4}/>
-            </div>
+                    <div className='mt-5'>
+                        <p className='title'>tất cả các mặt hàng</p>
+                        <div className='row'>
+                            {list.map((card: any) => {
+                                return (
+                                    <div className="col-sm-3 col-12 mb-3" key={card.id}>
+                                        <CardProduct card={card}/>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className='mt-4'>
+                        <Pagination pageNumber={4}/>
+                    </div>
+                </>
+            )}
         </div>
     )
 };

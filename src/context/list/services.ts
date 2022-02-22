@@ -21,7 +21,7 @@ async function getView(url, id): Promise<string> {
 }
 
 async function getStoryByAuthor(url): Promise<string> {
-    const response = await Api.get(url)
+    const response = await Api.get(getApi() + url)
 
     return response.data
 }

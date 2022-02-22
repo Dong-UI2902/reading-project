@@ -85,7 +85,7 @@ const ViewProduct = () => {
                             <div id='detail'/>
                         </div>
                         {product.detail.length > 1100 ? <p>
-                            <button className="btn btn-primary readmore" type="button" data-bs-toggle="collapse"
+                            <button className="btn btn-primary readmore collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseExample" aria-expanded="false"
                                     aria-controls="collapseExample" />
                         </p> : <></>}

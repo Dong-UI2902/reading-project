@@ -107,11 +107,18 @@ const NavHeader: React.FC = () => {
                                             {user.username}
                                         </a>
                                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><Link className="dropdown-item" to="/store/edit">Chỉnh sửa cửa hàng</Link></li>
+                                            <li>
+                                                <Link className="dropdown-item" to="/store/edit">Chỉnh sửa sextoy</Link>
+                                            </li>
+                                            <li>
+                                                <Link className="dropdown-item" to="/store/other">Khác...</Link>
+                                            </li>
                                             <li>
                                                 <hr className="dropdown-divider" />
                                             </li>
-                                            <li><a className="dropdown-item" type='button' onClick={handleClick}>Logout</a></li>
+                                            <li>
+                                                <a className="dropdown-item" type='button' onClick={handleClick}>Logout</a>
+                                            </li>
                                         </ul>
                                     </li>) : (<AuthItem links={AuthLinks()} activeLinkId={activeLinkId}/>)
                                 }
