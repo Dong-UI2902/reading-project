@@ -5,6 +5,9 @@ import Loading from "../components/Loading/Loading";
 import AlertError from "../components/AlertError/AlertError";
 import {useStory} from "../context/story/Provider";
 import {useParams} from "react-router-dom";
+import {isMobile} from "react-device-detect";
+import {useListStory} from "../context/list/Provider";
+import {toast} from "react-toastify";
 
 export const ViewStyle = styled.div`
     #status {
@@ -36,12 +39,31 @@ export const ViewStyle = styled.div`
         }
     }
 `
+toast.configure()
 const View = () => {
     const {error, loading, getStory} = useStory()
-    const params = useParams();
+    const {id} = useParams();
+
+    const {flStory, isFl, unFlStory, history} = useListStory()
+
+    const getProps = () => {
+        const name = document.title;
+        return {id, name}
+    }
+
+    const handleClickFl = () => {
+        flStory(getProps(), {isFollow: true})
+        toast.success('Bạn đã theo dõi truyện này')
+    }
+
+    const handleClickUnFl = () => {
+        unFlStory(id)
+        toast.warning('Bạn đã huỷ theo dõi truyện này')
+    }
+
 
     useEffect(() => {
-        getStory(params.id)
+        getStory(id)
     }, [])
 
     return (
@@ -50,27 +72,82 @@ const View = () => {
             <AlertError>{error}</AlertError>
             <ViewStyle>
                 <div className={`view ${loading && 'd-none'}`}>
-                    <div className='row'>
-                        <div className='col-md-9'>
-                            <div id='title'/>
+                    {isMobile ? (
+                        <>
                             <div className='row'>
-                                <div className='col-md-4' id='image'/>
-                                <div className='col-md-8'>
-                                    <div className='row mt-2' id='status'/>
-                                    {/*<div className='btn'>*/}
-                                    {/*    <a href="#" className="btn btn-primary">Đọc từ đầu</a>*/}
-                                    {/*    <a href="#" className="btn btn-primary">Đọc mới nhất</a>*/}
-                                    {/*</div>*/}
+                                <div id='image'/>
+                            </div>
+                            <div className='mt-4'>
+                                <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li className="nav-item" role="presentation">
+                                        <button className="nav-link active" id="chapters-tab" data-bs-toggle="pill"
+                                                data-bs-target="#chapters" type="button" role="tab"
+                                                aria-controls="chapters"
+                                                aria-selected="true">Danh Sách Chương
+                                        </button>
+                                    </li>
+                                    <li className="nav-item" role="presentation">
+                                        <button className="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                data-bs-target="#infoStory" type="button" role="tab"
+                                                aria-controls="infoStory" aria-selected="false">Thông Tin Truyện
+                                        </button>
+                                    </li>
+
+                                </ul>
+                                <div className="tab-content" id="pills-tabContent">
+                                    <div className="tab-pane fade show active" id="chapters" role="tabpanel"
+                                         aria-labelledby="pills-home-tab">
+                                        <div id='chapters'/>
+                                    </div>
+                                    <div className="tab-pane fade" id="infoStory" role="tabpanel"
+                                         aria-labelledby="pills-profile-tab">
+                                        <div id='infoStory'/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className='col-md-3 border border-1 rounded'>
-                            <div id='sameAuthor'/>
-                        </div>
-                    </div>
-                    <div>
-                        <div id='chapters'/>
-                    </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className='row'>
+                                <div className='col-md-9'>
+                                    <div id='title'/>
+                                    <div className='row'>
+                                        <div className='col-md-4' id='image'/>
+                                        <div className='col-md-8'>
+                                            <div className='row mt-2' id='status'/>
+                                            {/*<div className='btn'>*/}
+                                            {/*    <a href="#" className="btn btn-primary">Đọc từ đầu</a>*/}
+                                            {/*    <a href="#" className="btn btn-primary">Đọc mới nhất</a>*/}
+                                            {/*</div>*/}
+
+                                            <div className="mt-2 mb-3 follow-btn">
+                                                <div>
+                                                    {history[isFl(id)]?.isFollow ? (
+
+                                                        <button className="btn btn-warning" onClick={handleClickUnFl}>
+                                                            <i className="fa fa-times-circle fa-fw"/>
+                                                            Bỏ theo dõi
+                                                        </button>
+                                                    ) : (
+                                                        <button className="btn btn-success" onClick={handleClickFl}>
+                                                            <i className="fa fa-heart fa-fw"/>
+                                                            Theo dõi
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-md-3 border border-1 rounded'>
+                                    <div id='sameAuthor'/>
+                                </div>
+                            </div>
+                            <div>
+                                <div id='chapters'/>
+                            </div>
+                        </>
+                    )}
                 </div>
             </ViewStyle>
         </>

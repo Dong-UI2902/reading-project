@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Style = styled.div`
 text-align: center;
 margin-top: 20vh;
-height: 50vh;
+height: 40vh;
 
 .lds-ellipsis {
   display: inline-block;

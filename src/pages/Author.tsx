@@ -8,11 +8,11 @@ import Card from "../components/Cards/Card";
 
 const Author = () => {
     const params = useParams();
-    const {getStoryByAuthor, loading, error, list} = useListStory()
+    const {searchStory, loading, error, list} = useListStory()
 
     useEffect(() => {
-        getStoryByAuthor(params.keys)
-        document.title = `Tác giả ${params.keys}`
+        // searchStory(params.keys)
+        document.title = 'Tìm kiếm'
     }, [])
 
     return (

@@ -71,13 +71,22 @@ $base-color: #db0075;
     }
   }
 
-  #status {
+  #status, .follow-btn {
     max-width: 540px;
     margin: 0 auto;
 
     div {
       color: #777676;
       font-weight: 600;
+    }
+  }
+
+  .follow-btn {
+    button, i{
+      color: #fff!important;
+    }
+    div {
+      margin: 10px 10px;
     }
   }
 

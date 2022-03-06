@@ -10,6 +10,7 @@ const StoryProvider: React.FC = ({children}) => {
 
     const changeUrlImage = (element) => {
         const images = element.querySelectorAll('img')
+
         const length = images.length
         for (let i = 0; i < length; i++) {
             const url = images[i].getAttribute('src')
@@ -38,12 +39,11 @@ const StoryProvider: React.FC = ({children}) => {
     }
 
     const addAltImages = (image) => {
-        return image.setAttribute('alt', `đã xảy ra lỗi`)
+        image.setAttribute('alt', `đã xảy ra lỗi`)
     }
 
     const formatDataMobile = (doc, id) => {
-        changeUrlImage(doc)
-
+        changeUrlImage(doc.getElementsByClassName('flexRow pt-2')[0])
         document.getElementById('image').innerHTML = doc
             .getElementsByClassName('flexRow')[1]
             .innerHTML
@@ -65,7 +65,7 @@ const StoryProvider: React.FC = ({children}) => {
             .getElementsByClassName('text-center mb-3')[0]
             .innerHTML
 
-        changeUrlImage(doc)
+        changeUrlImage(doc.getElementsByClassName('row')[2])
 
         document.getElementById('image').innerHTML = doc
             .getElementsByClassName('col-md-4 text-center')[0]
@@ -74,12 +74,13 @@ const StoryProvider: React.FC = ({children}) => {
         const info = doc.getElementsByClassName('row mt-2')[0]
         changeUrl(info, process.env.REACT_APP_URL_INFO, '/tag/')
         const author = info.getElementsByClassName('col-8')[0]
-        changeUrl(author, '/tag//story/search.php?type=tacgia&key=', '/author/')
+        changeUrl(author, '/tag//story/search.php?type=tacgia&key=', '/search/tacgia/')
         changeUrl(author, '&exact/1', '')
         document.getElementById('status').innerHTML = info.innerHTML
 
         const chapters = doc.getElementsByClassName('detail-content mt-3')[0]
         changeUrl(chapters, process.env.REACT_APP_URL_CHAPTER, `${id}/read/`)
+
         document.getElementById('chapters').innerHTML = chapters.innerHTML
 
         const sameAuthor = doc.getElementsByClassName('darkbox')[0]
@@ -104,7 +105,7 @@ const StoryProvider: React.FC = ({children}) => {
                 }
             })
             .catch(newError => setError('Đã xảy ra lỗi'))
-            .finally(() => setLoading(false))
+            .finally(() => setLoading(false));
     }
 
     const memoValue = useMemo(

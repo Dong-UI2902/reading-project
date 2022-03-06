@@ -28,3 +28,5 @@ export const PRODUCT = {
 }
 
 export const PATH = '/PHP/auth/';
+
+export const HISTORY_KEY = 'HISTORY';

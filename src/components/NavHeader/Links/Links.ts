@@ -9,7 +9,7 @@ const SOCIAL_TYPE = 'social'
 export const LINKS: Links = [
     {
         id: 1,
-        name: "Home",
+        name: "Trang chủ",
         to: "/",
         type: APP_TYPE,
     },
@@ -21,7 +21,7 @@ export const LINKS: Links = [
     // },
     {
         id: 3,
-        name: "Store",
+        name: "Cửa hàng",
         to: '/store',
         type: APP_TYPE,
     },
@@ -63,8 +63,20 @@ export const LINKS: Links = [
     },
     {
         id: 10,
-        name: "Tags",
+        name: "Thể loại",
         to: '/tag',
+        type: APP_TYPE,
+    },
+    {
+        id: 11,
+        name: "Lịch sử",
+        to: '/history',
+        type: APP_TYPE,
+    },
+    {
+        id: 12,
+        name: "Theo dõi",
+        to: '/follow',
         type: APP_TYPE,
     },
 ]

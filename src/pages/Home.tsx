@@ -20,7 +20,7 @@ const Home = () => {
             <div>
                 <img src='/logo.png' alt="" className="home__img"/>
                 <div className="home__data">
-                    <h1 className="home__title">
+                    <h1 className="home__title main-color">
                         CaoNhan Collection
                     </h1>
                     <p className="description">
@@ -30,7 +30,7 @@ const Home = () => {
                 </div>
             </div>
             <div className='platform'>
-                <h2 className='title'>Namitoys Applications</h2>
+                <h2 className='title main-color'>Namitoys Applications</h2>
 
                 <div className='row'>
                     <div className='col-6' onClick={() => accessUrl('store')}>

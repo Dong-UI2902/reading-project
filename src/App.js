@@ -17,8 +17,6 @@ import Read from "./pages/Read";
 import TagList from "./pages/TagList";
 import Tag from "./pages/Tag";
 import AllStory from "./pages/AllStory";
-import ViewMobile from "./pages/ViewMobile";
-import {isMobile} from "react-device-detect";
 import Story from "./pages/Story";
 import ViewProduct from "./pages/ViewProduct";
 import {ThemeProvider} from "./theme/Provider";
@@ -27,8 +25,10 @@ import About from "./pages/About";
 import EditStore from "./pages/EditStore";
 import StoreProvider from "./context/store/Provider";
 import Footer from "./components/footer/footer";
-import Author from "./pages/Author";
 import NotFound from "./pages/NotFound";
+import Search from "./pages/Search";
+import History from "./pages/History";
+import Follow from "./pages/Follow";
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -64,9 +64,11 @@ const App = () => {
                         <Route path="/story/:p" element={<AllStory/>}/>
                         <Route path="/tag" element={<Tag/>}/>
                         <Route path="/tag/:id/:p" element={<TagList/>}/>
-                        <Route path="/author/:keys" element={<Author/>}/>
-                        <Route path="/view/:id" element={isMobile ? <ViewMobile/> : <View/>}/>
+                        <Route path="/view/:id" element={<View/>}/>
                         <Route path="/view/:id/read/:chapter" element={<Read/>}/>
+                        <Route path="/search/:type/:keys" element={<Search/>}/>
+                        <Route path="/history" element={<History/>}/>
+                        <Route path="/follow" element={<Follow/>}/>
                     </Routes>
                     <Footer/>
                 </Main>

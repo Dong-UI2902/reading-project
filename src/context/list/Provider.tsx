@@ -1,9 +1,10 @@
 import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
-import {ListStoryContextAPI, Story} from "./type";
+import {History_Story, ListStoryContextAPI, Story} from "./type";
 import services from "./services";
 import {useDevice} from "../device/Provider";
 import {isMobile} from "react-device-detect";
 import {useLocation} from "react-router-dom";
+import {HISTORY_KEY} from "../constant/constants";
 
 const ListStoryContext = createContext<ListStoryContextAPI>({} as ListStoryContextAPI)
 
@@ -18,7 +19,7 @@ const ListStoryProvider: React.FC = ({children}) => {
     const location = useLocation();
 
     useEffect(() => {
-        if(error) window.location.href = '/404';
+        if (error) window.location.href = '/404';
     }, [error])
 
     useEffect(() => {
@@ -125,10 +126,10 @@ const ListStoryProvider: React.FC = ({children}) => {
             .finally(() => setLoading(false))
     }
 
-    const getStoryByAuthor = (author) => {
+    const searchStory = (text) => {
         setLoading(true)
         services
-            .getStoryByAuthor(`story/search.php?type=tacgia&key=${author}&exact`)
+            .getStoryByAuthor(`/story/search.php?${text}&exact`)
             .then(res => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(res, 'text/html');
@@ -146,17 +147,67 @@ const ListStoryProvider: React.FC = ({children}) => {
             .finally(() => setLoading(false))
     }
 
+    const getHistory = () => {
+        if (typeof window !== 'undefined') {
+            const listHistory = localStorage.getItem(HISTORY_KEY)
+            return listHistory ? JSON.parse(listHistory) : []
+        }
+
+        return []
+    }
+
+    const [history, setHistory] = useState<History_Story[]>(() => {
+        return getHistory()
+    })
+
+    const isFl = (id: string) => {
+
+        return history.findIndex(item => item.id === id)
+    }
+
+    const flStory = (story: Story, act) => {
+        let arr = getHistory();
+        const followed = arr.findIndex(item => item.id === story.id)
+        if (followed >= 0) {
+            arr[followed] = {...arr[followed], ...story, ...act, followDay: new Date().toLocaleDateString()}
+        } else {
+            arr = [...arr, {...story, ...act, readDay: new Date().toLocaleDateString()}]
+        }
+        setHistory(arr);
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
+    }
+
+    const unFlStory = (id) => {
+        const arr = getHistory();
+        const followed = arr.findIndex(item => item.id === id)
+        const unFl = arr[followed]
+
+        if (!unFl.chapterRead) {
+            arr.splice(followed, 1)
+        } else {
+            unFl.isFollow = false;
+        }
+        setHistory(arr)
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
+    }
+
     const memoValue = useMemo(
         () => ({
             list,
             nav,
             loading,
             error,
+            history,
             getData,
-            getStoryByAuthor,
+            searchStory,
+            getHistory,
+            flStory,
+            unFlStory,
+            isFl,
             // eslint-disable-next-line react-hooks/exhaustive-deps
-        }), [list, nav, loading, error],
+        }), [list, nav, loading, error, history],
     )
+
     return <ListStoryContext.Provider value={memoValue}>{children}</ListStoryContext.Provider>
 };
 
