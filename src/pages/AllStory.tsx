@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Cards from "../components/Cards/Cards";
 import {useParams} from "react-router-dom";
 import SearchBox from "../components/SearchBox/SearchBox";
 
 const AllStory = () => {
     const params = useParams();
+
+    useEffect(() => {
+    }, [])
 
     return (
         <div>

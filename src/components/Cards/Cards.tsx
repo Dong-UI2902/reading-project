@@ -18,6 +18,7 @@ const Cards = ({id, page}) => {
 
     useEffect(() => {
         getData(id, page)
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [id, page])
 
     return (

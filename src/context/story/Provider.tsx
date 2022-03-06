@@ -51,7 +51,7 @@ const StoryProvider: React.FC = ({children}) => {
         const infoStory = doc.getElementById('pills-ttt')
         changeUrl(infoStory, process.env.REACT_APP_URL_INFO, '/tag/')
         const author = infoStory.getElementsByTagName('div')[0];
-        changeUrl(author, '/tag//story/search.php?type=tacgia&key=', '/author/')
+        changeUrl(author, '/tag//story/search.php?type=tacgia&key=', '/search/tacgia/')
         changeUrl(author, '&exact/1', '')
         document.getElementById('infoStory').innerHTML = infoStory.innerHTML
 

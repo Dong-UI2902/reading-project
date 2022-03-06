@@ -11,7 +11,7 @@ const History = () => {
         return arr.filter(item => item.chapterRead)
     })
 
-    return <TableStory list={list.reverse()} name={'Lịch sử đọc truyện'}/>;
+    return <TableStory list={list.reverse()} name={'Truyện đã đọc'}/>;
 };
 
 export default History;

@@ -11,7 +11,12 @@ const Follow = () => {
         return arr.filter(item => item.isFollow)
     })
 
-    return <TableStory list={list.reverse()} name={'Truyện đã theo dõi'}/>;
+    return (
+        <>
+
+            <TableStory list={list.reverse()} name={'Truyện đã theo dõi'}/>
+        </>
+    );
 };
 
 export default Follow;

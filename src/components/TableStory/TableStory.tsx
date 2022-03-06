@@ -34,7 +34,7 @@ const TableStory = ({list, name}) => {
                                     track.map((item, index) => (
                                         <tr key={index} onClick={() => handleClick(item)} className='row-tb'>
                                             <td>{item.name}</td>
-                                            <td>{item.chapterRead}</td>
+                                            <td>{item.chapterRead ? (item.chapterRead) : ('Chưa đọc')}</td>
                                             <td>{item.readDay}</td>
                                         </tr>
                                     ))

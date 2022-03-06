@@ -51,6 +51,7 @@ const Pagination = ({pageNumber}) => {
 
     useEffect(() => {
         setPages(updatePages(page));
+        window.scrollTo({ top: 0});
     }, [page]);
 
     useEffect(() => {
