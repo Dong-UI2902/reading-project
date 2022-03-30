@@ -11,23 +11,28 @@ export interface Story {
     thumb: string
 }
 
-export interface History_Story extends Story{
+export interface HistoryStory extends Story {
     chapterRead?: string
     isFollow?: boolean
     readDay?: string
     followDay?: string
+    source: string
+}
+
+export interface ShareStory extends HistoryStory {
+    checked: boolean
 }
 
 export interface ListStoryContextAPI {
     list: Story[]
-    history: History_Story[]
+    history: HistoryStory[]
     nav: number[]
     loading: boolean
     error: string
     getData: (id: string, page: string) => void
     searchStory: (text: string) => void
     isFl: (id: string) => number
-    getHistory: () => History_Story[]
+    getHistory: () => HistoryStory[]
     flStory: (story, act) => void
     unFlStory: (id: string) => void
 }

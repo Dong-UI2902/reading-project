@@ -111,7 +111,7 @@ const Read = () => {
     }
 
     const handleClickFl = () => {
-        flStory({id}, {isFollow: true})
+        flStory({id}, {isFollow: true, source: 'tôi'})
         toast.success('Bạn đã theo dõi truyện này')
     }
 
@@ -131,7 +131,7 @@ const Read = () => {
                 const title = doc.title
                 document.title = title
                 const story = {id, name: title.substring(0, title.lastIndexOf('-') - 1)}
-                flStory(story, {chapterRead: title.substring(title.lastIndexOf('-') + 2, title.length)})
+                flStory(story, {chapterRead: title.substring(title.lastIndexOf('-') + 2, title.length), source: 'tôi'})
 
                 if (!isMobile) {
                     getTitleOnPc(doc);
@@ -157,7 +157,7 @@ const Read = () => {
                     <h2>{aTag}</h2>
                 </div>
                 <div className='info'>
-                    <div id='chapters' className='row mb-4' />
+                    <div id='chapters' className='row mb-4'/>
                     {history[isFl(id)]?.isFollow ? (
 
                         <button className="btn btn-warning" onClick={handleClickUnFl}>

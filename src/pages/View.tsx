@@ -52,7 +52,7 @@ const View = () => {
     }
 
     const handleClickFl = () => {
-        flStory(getProps(), {isFollow: true})
+        flStory(getProps(), {isFollow: true, source: 'tôi'})
         toast.success('Bạn đã theo dõi truyện này')
     }
 

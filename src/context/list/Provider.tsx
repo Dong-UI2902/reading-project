@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
-import {History_Story, ListStoryContextAPI, Story} from "./type";
+import {HistoryStory, ListStoryContextAPI, Story} from "./type";
 import services from "./services";
 import {useDevice} from "../device/Provider";
 import {isMobile} from "react-device-detect";
@@ -156,7 +156,7 @@ const ListStoryProvider: React.FC = ({children}) => {
         return []
     }
 
-    const [history, setHistory] = useState<History_Story[]>(() => {
+    const [history, setHistory] = useState<HistoryStory[]>(() => {
         return getHistory()
     })
 
